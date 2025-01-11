@@ -10,8 +10,8 @@ import { Suspense } from "react";
 
 const columns = [
   { id: "name", header: "Nome", accessorKey: "repoName" },
-  { id: "lastSync", header: "Ultima sincronização", accessorKey: "lastSync" },
   { id: "prs", header: "PRs", accessorKey: "prCount" },
+  { id: "owner", header: "Dono", accessorKey: "owner" },
   { id: "status", header: "Status", accessorKey: "status" },
 ];
 

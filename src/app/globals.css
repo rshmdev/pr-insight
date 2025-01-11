@@ -80,9 +80,9 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border [&::-webkit-scrollbar]:w-2  [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-700;
   }
   body {
-    @apply bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-foreground;
+    @apply bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-foreground max-h-screen flex gap-2 min-h-screen;
   }
 }

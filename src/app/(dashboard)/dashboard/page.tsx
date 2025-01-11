@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -24,8 +23,9 @@ export default function DashboardPage() {
 
   console.log(data);
 
+
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6 overflow-y-auto">
+    <div className=" space-y-4 p-8 pt-6 overflow-y-auto">
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
       </div>
@@ -107,7 +107,7 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
-            <Overview />
+            <Overview prData={data?.monthlyGenerations || []} />
           </CardContent>
         </Card>
         <Card className="flex-1">
@@ -117,7 +117,7 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <RecentPRs />
+            <RecentPRs lastPrs={data?.lastPullRequests || []}  />
           </CardContent>
         </Card>
       </div>

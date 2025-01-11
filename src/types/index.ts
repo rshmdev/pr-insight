@@ -64,32 +64,40 @@ export interface QueryBuilderOpts {
 }
 
 export interface GithubRepository {
-  id: number
-  name: string
-  owner: string
-  fullName: string
-  description: string | null 
-  private: boolean
-  language: string | null
+  id: number;
+  name: string;
+  owner: string;
+  fullName: string;
+  description: string | null;
+  private: boolean;
+  language: string | null;
 }
 
-
 export interface Repository {
-  id: string
-  repoName: string
-  owner: string
-  prCount: number
-  lastSync: string
-  status: string
+  id: string;
+  repoName: string;
+  owner: string;
+  prCount: number;
+  lastSync: string;
+  status: string;
 }
 
 export interface PullRequest {
-  id: number
-  title: string
-  repoName: string
-  state: string
-  createdAt: string
-  updatedAt: string
-  author: string
-  description: string
+  id: number;
+  title: string;
+  repoName: string;
+  state: string;
+  createdAt: string;
+  updatedAt: string;
+  author: string;
+  description: string;
+}
+
+export interface INotification {
+  id: string;
+  userId: string;
+  message: string;
+  type: "info" | "success" | "error" | "warning";
+  read: boolean;
+  createdAt: string;
 }

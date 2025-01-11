@@ -1,66 +1,49 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { GitPullRequest, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export function RecentPRs() {
+export function RecentPRs({ lastPrs }: { lastPrs: any[] }) {
+  if (!lastPrs || lastPrs.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 text-center">
+        <div className="rounded-full bg-gray-800 p-6 size-24">
+          <GitPullRequest className="h-12 w-12 text-gray-400" />
+        </div>
+        <h3 className="text-lg font-semibold text-white">
+          No recent pull requests
+        </h3>
+        <p className="text-sm text-gray-400">
+          Connect a repository to start tracking pull requests
+        </p>
+        <Button variant="outline" className="mt-2 gap-2">
+            <Plus className="h-4 w-4" />
+            Connect Repository
+          </Button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
-      {recentPRs.map((pr) => (
+    <div className="space-y-2">
+      {lastPrs.map((pr) => (
         <div
-          key={pr.id}
+          key={pr._id}
           className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between p-4 border rounded-lg"
         >
           <div className="flex items-center w-full sm:w-auto">
             <Avatar className="h-9 w-9 shrink-0">
               <AvatarImage src={pr.avatar} alt="Avatar" />
-              <AvatarFallback>{pr.name.charAt(0)}</AvatarFallback>
+              <AvatarFallback>{pr.userId.name}</AvatarFallback>
             </Avatar>
             <div className="ml-4">
-              <p className="text-sm font-medium leading-none">{pr.name}</p>
-              <p className="text-sm text-muted-foreground">{pr.email}</p>
+              <p className="text-sm font-medium leading-none">
+                {pr.userId.name}
+              </p>
+              <p className="text-sm text-muted-foreground">{pr.userId.email}</p>
             </div>
-          </div>
-          <div className="mt-2 sm:mt-0 sm:ml-auto text-right">
-            <p className="font-medium">{pr.prTitle}</p>
           </div>
         </div>
       ))}
     </div>
   );
 }
-
-const recentPRs = [
-  {
-    id: "1",
-    name: "Olivia Martin",
-    email: "olivia.martin@example.com",
-    prTitle: "Add user authentication",
-    avatar: "/avatars/01.png",
-  },
-  {
-    id: "2",
-    name: "Jackson Lee",
-    email: "jackson.lee@example.com",
-    prTitle: "Implement dark mode",
-    avatar: "/avatars/02.png",
-  },
-  {
-    id: "3",
-    name: "Isabella Nguyen",
-    email: "isabella.nguyen@example.com",
-    prTitle: "Optimize database queries",
-    avatar: "/avatars/03.png",
-  },
-  {
-    id: "4",
-    name: "William Chen",
-    email: "william.chen@example.com",
-    prTitle: "Update API documentation",
-    avatar: "/avatars/04.png",
-  },
-  {
-    id: "5",
-    name: "Sofia Rodriguez",
-    email: "sofia.rodriguez@example.com",
-    prTitle: "Fix responsive layout issues",
-    avatar: "/avatars/05.png",
-  },
-];

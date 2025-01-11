@@ -2,7 +2,7 @@ import NextAuth, { CredentialsSignin } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Credentials from "next-auth/providers/credentials";
 import { api } from "./lib/api";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
 class InvalidLoginError extends CredentialsSignin {
   code = "Invalid identifier or password";
@@ -47,8 +47,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             githubUsername: profile.login,
           };
 
-          console.log("githubUser", githubUser);
-
           await api.post(`/users/github`, githubUser);
         } catch (error) {
           console.error("Erro ao salvar usuário no banco:", error);
@@ -61,13 +59,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     async jwt({ token, account, profile }) {
       if (account && account.provider === "github" && profile) {
         const githubToken = account.access_token;
-  
+
         const customJwt = jwt.sign(
           { id: profile.id, email: profile.email, githubToken },
           process.env.JWT_SECRET!,
           { expiresIn: "1d" }
         );
-  
+
         token.customJwt = customJwt;
       }
       return token;
@@ -76,6 +74,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       (session as any).githubToken = token.githubToken || null;
       (session as any).token = token.customJwt || null;
+
+      try {
+        const response = await api.get(`/users/me`, {
+          headers: { Authorization: `Bearer ${session.token}` },
+        });
+
+        const userInfo = response.data;
+
+        session.user = {
+          ...session.user,
+          plan: userInfo.plan?.name || "Gratuito",
+          image: userInfo.avatar || session.user.image,
+        };
+      } catch (error) {
+        console.error("Erro ao buscar informações do usuário:", error);
+      }
+
       return session;
     },
   },

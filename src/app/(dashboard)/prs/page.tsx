@@ -58,6 +58,7 @@ export default function PullRequestsPage() {
     pageCount: 1,
     shallow: false,
     clearOnDefault: true,
+    
   });
 
   return (
