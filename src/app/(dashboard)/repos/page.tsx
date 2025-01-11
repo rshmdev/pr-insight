@@ -1,12 +1,12 @@
 "use client";
 
-
 import { DataTable } from "@/components/data-table";
 import { useDataTable } from "@/hooks/use-data-table";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getRepos } from "@/services/repos";
 import { ConnectRepo } from "@/components/connect-repo";
+import { Suspense } from "react";
 
 const columns = [
   { id: "name", header: "Nome", accessorKey: "repoName" },
@@ -33,12 +33,14 @@ export default function RepositoriesPage() {
   });
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Connected Repositories</h1>
-        <ConnectRepo />
+    <Suspense>
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Connected Repositories</h1>
+          <ConnectRepo />
+        </div>
+        <DataTable table={table} />
       </div>
-      <DataTable table={table} />
-    </div>
+    </Suspense>
   );
 }

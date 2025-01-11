@@ -9,6 +9,7 @@ import { getPrs } from "@/services/prs";
 import { ColumnDef } from "@tanstack/react-table";
 import { PullRequest } from "@/types";
 import { Badge } from "@/components/ui/badge";
+import { Suspense } from "react";
 
 const columns: ColumnDef<PullRequest>[] = [
   { id: "name", header: "Nome", accessorKey: "title" },
@@ -60,11 +61,13 @@ export default function PullRequestsPage() {
   });
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Historico de Pull Requests</h1>
+    <Suspense>
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Historico de Pull Requests</h1>
+        </div>
+        <DataTable table={table} />
       </div>
-      <DataTable table={table} />
-    </div>
+    </Suspense>
   );
 }
