@@ -9,11 +9,8 @@ import {
 import { Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { loadStripe } from "@stripe/stripe-js";
-import { api } from "@/lib/api";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useCheckout } from "@/services/checkout";
 
 export interface PricingCardProps {
