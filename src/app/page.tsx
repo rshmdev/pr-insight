@@ -20,13 +20,10 @@ import {
 } from "@/components/ui/accordion";
 import { PricingCard, PricingCardProps } from "@/components/pricing-card";
 import { FeatureCard, FeatureCardProps } from "@/components/feature-card";
-import { useSearchParams } from "next/navigation";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useSession } from "next-auth/react";
@@ -41,8 +38,6 @@ const LandingPage: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const { data: session } = useSession();
-
-  const params = useSearchParams();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
