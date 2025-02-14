@@ -148,7 +148,7 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen text-white mx-auto">
       <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
@@ -394,7 +394,7 @@ const LandingPage: React.FC = () => {
         </section>
       </main>
 
-      <footer className="bg-gray-900 py-12">
+      <footer className="bg-gray-900 py-12 absolute botton-0 left-0 w-full">
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
             <h3 className="text-xl font-bold mb-2">Empresa</h3>
